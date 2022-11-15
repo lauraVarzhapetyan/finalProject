@@ -1,5 +1,4 @@
 
-
 var LivingCreature = require('./LivingCreature');
 module.exports = class Equalizer extends LivingCreature{
     constructor(x, y, index) {

@@ -24,14 +24,11 @@ for( var n=0; n<row; n++)
     }
 }
 
-function setup() {
-    noStroke();
-    frameRate(6);
-    createCanvas(matrix[0].length * side, matrix.length * side); //կտավի չափերը դնել մատրիցայի չափերին համապատասխան
-    background('#acacac');
-  
-    //Կրկնակի ցիկլը լցնում է օբյեկտներով խոտերի և խոտակերների զանգվածները
-    //հիմնվելով մատրիցի վրա 
+
+//draw ֆունկցիան գծում է «կադրերը», վարկյանում 60 կադր արագությամբ
+//եթե տրված չէ այլ կարգավորում frameRate ֆունկցիայի միջոցով
+//draw ֆունկցիան ինչ որ իմաստով անվերջ կրկնություն է (цикл, loop)
+function game() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 2) {
@@ -55,14 +52,7 @@ function setup() {
             }
         }
     }
-}
 
-//draw ֆունկցիան գծում է «կադրերը», վարկյանում 60 կադր արագությամբ
-//եթե տրված չէ այլ կարգավորում frameRate ֆունկցիայի միջոցով
-//draw ֆունկցիան ինչ որ իմաստով անվերջ կրկնություն է (цикл, loop)
-function draw() {
-    //Գծում է աշխարհը, հիմվելով matrix-ի վրա
-    background('#acacac');
     for (var i = 0; i < matrix.length; i++) {
         for (var j = 0; j < matrix[i].length; j++) {
             if (matrix[i][j] == 1) {
@@ -84,11 +74,9 @@ function draw() {
     }
 
 
-    //յուրաքանչյուր խոտ փորձում է բազմանալ
     for (var i in grassArr) {
         grassArr[i].mul();
     }
-    //յուրաքանչյուր խոտակեր փորձում է ուտել խոտ
     for (var i in eatArr) {
         eatArr[i].eat();
     }
@@ -111,6 +99,7 @@ var express = require("express");
 
 var app = express();
 
+/*
 app.use(express.static("."));
 
 app.get("/", function (req, res) {
@@ -118,11 +107,11 @@ app.get("/", function (req, res) {
     res.redirect("index.html");
 
 });
-
+*/
 app.listen(3000, function () {
 
     console.log("Example is running on port 3000");
 
 });
 
-//setInterval(displayHello, 1000);
+setInterval(game, 1000);

@@ -1,54 +1,9 @@
 
-var side = 5;
-var grassArr = []; //խոտերի զանգված
-var eatArr = []; //խոտակերների զանգված
-var gishatichArr=[];
-var taguhiArr=[];
-var matArr=[];
-var eArr=[];
-var matrix=[];
-var row=80;
-var column=80;
-for( var n=0; n<row; n++)
-{
-    matrix[n]=[];
-    for( var e=0; e<column; e++)
-    {
-        matrix[n][e]=Math.round(Math.random()*6);
-    }
-}
-
 function setup() {
     noStroke();
     frameRate(6);
     createCanvas(matrix[0].length * side, matrix.length * side); //կտավի չափերը դնել մատրիցայի չափերին համապատասխան
     background('#acacac');
-  
-    //Կրկնակի ցիկլը լցնում է օբյեկտներով խոտերի և խոտակերների զանգվածները
-    //հիմնվելով մատրիցի վրա 
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 2) {
-                var eatgrass = new GrassEater(x, y);
-                eatArr.push(eatgrass);
-            } else if (matrix[y][x] == 1) {
-                var grass = new Grass(x, y);
-                grassArr.push(grass);
-            } else if (matrix[y][x]==3){
-                var gish=new Gishatich(x,y);
-                gishatichArr.push(gish);
-            } else if (matrix[y][x]==4){
-                var taguhi = new Taguhi(x,y);
-                taguhiArr.push(taguhi);
-            } else if(matrix[y][x]==5){
-                var mat=new Mat(x,y);
-                matArr.push(mat);
-            } else if(matrix[y][x]==6){
-                var equalizer=new Equalizer(x,y);
-                eArr.push(equalizer);
-            }
-        }
-    }
 }
 
 //draw ֆունկցիան գծում է «կադրերը», վարկյանում 60 կադր արագությամբ
@@ -82,27 +37,5 @@ function draw() {
                 rect(j*side, i*side, side, side);
             }
         }
-    }
-
-
-    //յուրաքանչյուր խոտ փորձում է բազմանալ
-    for (var i in grassArr) {
-        grassArr[i].mul();
-    }
-    //յուրաքանչյուր խոտակեր փորձում է ուտել խոտ
-    for (var i in eatArr) {
-        eatArr[i].eat();
-    }
-    for (var i in gishatichArr) {
-        gishatichArr[i].eat();
-    }
-     for (var i in taguhiArr) {
-        taguhiArr[i].eat();
-    }
-    for (var i in matArr) {
-        matArr[i].eat();
-    }
-    for (var i in eArr) {
-        eArr[i].eat();
     }
 }
